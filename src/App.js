@@ -1,27 +1,52 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { chats: [] };
+  }
+  onSubmit(e) {
+    e.preventDefault();
+    console.log(e);
+    alert();
+  }
+  onChat(message) {
+    alert(message);
+    this.setState({ chats: [...this.state.chats, message] });
+  }
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          <Chat />
+          <Bar onSubmit={this.onSubmit} />
         </header>
       </div>
     );
+  }
+}
+class Bar extends Component {
+  render() {
+    return (
+      <form onSubmit={this.props.onSubmit}>
+        <input type="text" />
+        <input type="submit" />
+      </form>
+    );
+  }
+}
+class Chat extends Component {
+  render() {
+    return <div className="chat" />;
+  }
+}
+
+class Bubble extends Component {
+  render() {
+    return <div className="bubble">{this.props.children}</div>;
   }
 }
 
